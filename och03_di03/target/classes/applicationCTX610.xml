@@ -13,7 +13,7 @@
 			</list>
 		</constructor-arg>
 		<property name="weight" value="55"/>
-		<property name="heigth" value="162"/>
+		<property name="height" value="162"/>
 	</bean>
 	
 	<bean id="studentInfo1" class="DI06.StudentInfo">
