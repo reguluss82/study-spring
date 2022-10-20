@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 생성자 방식 -->
+	<bean id="mb3" class="sam03.MessageBeanImpl">
+		<constructor-arg><value>홍성대</value></constructor-arg>
+		<constructor-arg value="DI 메리 크리스마스"></constructor-arg>
+	</bean>
+
+</beans>

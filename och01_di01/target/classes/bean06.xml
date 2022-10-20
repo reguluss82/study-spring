@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- constructor 방식 property 방식 -->
+	<!-- DI(Dependency Injection - 의존성 주입)
+		의존성 : 클래스의 객체가 다른 클래스의 객체에서 사용되는 것
+		주입 : 클래스 안에서 사용하는 객체를 내부에서 만들지 않고 외부에서 만든 것을 대입 받는 것
+	주입을 받는 방법은 생성자에서 받는 방법이 있고 setter를 이용해서 주입받는 방법이 있다.
+	spring에서의 di는 생성자나 setter를 이용해서 직접 받는 것이 아니고 설정파일을 이용해서 주입받는 것 -->
+	<bean id="vh6" class="sam06.VehicleImpl">
+		<constructor-arg value="한의정"></constructor-arg>
+		<property name="rider" value="300"></property>
+		<property name="speed"><value>300</value></property>
+	</bean>
+
+</beans>
