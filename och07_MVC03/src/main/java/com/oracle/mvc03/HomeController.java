@@ -98,7 +98,7 @@ public class HomeController {
 		System.out.println("member/join member.getId -> "    + member.getId());
 		System.out.println("member/join member.getPw -> "    + member.getPw());
 		System.out.println("member/join member.getEmail -> " + member.getEmail());
-		
+		System.out.println("member -> " + member);
 		model.addAttribute("member", member);
 		
 		return "member/join";

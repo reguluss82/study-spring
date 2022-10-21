@@ -46,5 +46,10 @@ public class RedirectController {
 		
 		return "student/studentSuccess";
 	}
-
+	
+	@RequestMapping("studentError")
+	public String studentError(Model model) {
+	       logger.info("studentError Start...");
+	       return "student/studentError";
+	}
 }

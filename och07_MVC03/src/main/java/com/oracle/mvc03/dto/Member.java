@@ -31,4 +31,9 @@ public class Member {
 		this.email = email;
 	}
 	
+	@Override
+	public String toString() {
+	    String returnStr = "[" + "이름: " + this.name + " , " + "아이디: " + this.id + "]";
+	    return returnStr;
+	}
 }
