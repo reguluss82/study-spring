@@ -21,6 +21,7 @@ public class HelloController {
 	public String hello(Model model) {
 		logger.info("start...");
 		model.addAttribute("parameter", "boot start...");
+		
 		return "hello";
 	}
 	
@@ -28,6 +29,7 @@ public class HelloController {
 	@GetMapping("ajaxString")
 	public String ajaxString(@RequestParam("ajaxName") String aName) {
 		System.out.println("HelloController ajaxString aName -> " + aName);
+
 		return aName;
 	}
 	
