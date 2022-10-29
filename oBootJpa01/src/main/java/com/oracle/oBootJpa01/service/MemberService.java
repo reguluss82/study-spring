@@ -31,4 +31,12 @@ public class MemberService {
 		System.out.println("MemberService getListAllMember listMember.size() -> " + listMember.size());
 		return listMember;
 	}
+
+	public List<Member> getListSearchMember(String searchName) {
+		System.out.println("MemberService getListSearchMember start...");
+		System.out.println("MemberService getListSearchMember searchName -> " + searchName);
+		List<Member> listMember = memberRepository.findByNames(searchName);
+		System.out.println("MemberService getListSearchMember listMember.size() -> " + listMember.size());
+		return listMember;
+	}
 }

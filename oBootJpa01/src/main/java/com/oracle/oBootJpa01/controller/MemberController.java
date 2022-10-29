@@ -45,4 +45,13 @@ public class MemberController {
 		model.addAttribute("members", memberList);
 		return "members/memberList";
 	}
+	
+	@PostMapping(value = "members/search") // "/" root 표시를 넣어도 빼도 상관없다
+	public String membersSearch(Member member, Model model) {
+		System.out.println("/members/search member.getName() -> " + member.getName());
+		List<Member> memberList = memberService.getListSearchMember(member.getName());
+		System.out.println("/members/search memberList.size() -> " + memberList.size());
+		model.addAttribute("members", memberList);
+		return "members/memberList";
+	}
 }
