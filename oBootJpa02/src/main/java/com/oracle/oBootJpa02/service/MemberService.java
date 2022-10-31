@@ -36,6 +36,21 @@ public class MemberService {
 	
 	public void memberUpdate(Member member) {
 		memberRepositroy.updateByMember(member);
-		return;
+		return; // service return과 동시에 sql 실행
+	}
+
+	public List<Member> getListSearchMember(String searchName) {
+		System.out.println("MemberService getListSearchMember Start...");
+		// String pSearchName = searchName + '%';
+		System.out.println("MemberService getListSearchMember searchName -> " + searchName);
+		List<Member> listMember = memberRepositroy.findByNames(searchName);
+		System.out.println("MemberService getListSearchMember listMember.size() -> " + listMember.size());
+		return listMember;
+	}
+
+	public List<Member> getListFindByMembers(Member member) {
+		List<Member> listMember = memberRepositroy.findByMembers(member.getId(), member.getSal());
+		System.out.println("MemberService getListFindByMembers listMember.size() -> " + listMember.size());
+		return listMember;
 	}
 }

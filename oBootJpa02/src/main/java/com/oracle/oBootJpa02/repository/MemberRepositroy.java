@@ -14,6 +14,8 @@ public interface MemberRepositroy {
 
 	int updateByMember(Member member);
 
-	
+	List<Member> findByNames(String searchName);
+
+	List<Member> findByMembers(Long id, Long sal);
 
 }
