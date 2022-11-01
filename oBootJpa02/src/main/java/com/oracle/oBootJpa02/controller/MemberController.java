@@ -57,9 +57,7 @@ public class MemberController {
 	
 	@GetMapping(value = "/members/search")
 	public String search(Member member , Model model) {
-		System.out.println("/members/search member.getName() -> " + member.getName());
 		List<Member> memberList = memberService.getListSearchMember(member.getName());
-		System.out.println("/members/search memberList.size() -> " + memberList.size());
 		model.addAttribute("memberList", memberList);
 		return "members/memberList";
 	}
@@ -67,8 +65,6 @@ public class MemberController {
 	@GetMapping(value = "/members/findByListMembers")
 	public String findByListMembers(Member member , Model model) {
 		List<Member> memberList = memberService.getListFindByMembers(member);
-		System.out.println("memberList.get(0).getName() -> "           + memberList.get(0).getName());
-		System.out.println("memberList.get(0).getTeam().getName() -> " + memberList.get(0).getTeam().getName());
 		model.addAttribute("memberList", memberList);
 		return "members/memberList";
 	}

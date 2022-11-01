@@ -3,6 +3,7 @@ package com.oracle.oBootJpa03.domain.item;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -19,6 +20,7 @@ import lombok.Setter;
 @Setter
 public abstract class Item {
 	@Id
+	@GeneratedValue // form에서 item_id (PK) 를 받지못한다.-> notNull 조건 위배되기 때문에 seq로 만들어준다.
 	@Column(name = "item_id")
 	private Long id;
 	

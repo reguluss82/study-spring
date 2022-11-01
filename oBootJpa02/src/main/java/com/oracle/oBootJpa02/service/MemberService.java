@@ -40,11 +40,8 @@ public class MemberService {
 	}
 
 	public List<Member> getListSearchMember(String searchName) {
-		System.out.println("MemberService getListSearchMember Start...");
 		// String pSearchName = searchName + '%';
-		System.out.println("MemberService getListSearchMember searchName -> " + searchName);
 		List<Member> listMember = memberRepositroy.findByNames(searchName);
-		System.out.println("MemberService getListSearchMember listMember.size() -> " + listMember.size());
 		return listMember;
 	}
 
