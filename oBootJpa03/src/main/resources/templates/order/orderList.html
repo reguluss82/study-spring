@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>회원명</th>
+					<th>배송지</th>
+					<th>상태</th>
+					<th>일시</th>
+					<!--  <th></th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="order : ${orders}">
+					<td th:text="${order.id}"></td>
+					<td th:text="${order.member.name}"></td>
+					<td th:text="${order.delivery.address.city}"></td>
+					<td th:text="${order.status}"></td>
+					<td th:text="${order.orderDate}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

@@ -32,4 +32,7 @@ public class MemberRepository{
 		return memberList;
 	}
 	
+	public Member findOne(Long id) {
+		return em.find(Member.class, id);
+	}
 }

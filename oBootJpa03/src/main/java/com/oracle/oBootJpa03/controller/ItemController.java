@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -52,8 +53,9 @@ public class ItemController {
 	 */
 	@GetMapping(value = "/items/{itemId}/edit")
 	public String updateItemForm(@PathVariable("itemId") Long itemId , Model model) {
-		//Book item = (Book) itemService.findOne(itemId);
-		Book item = (Book) itemService.findById(itemId);
+		//Book item = (Book) itemService.findOne(itemId); // EntityManager사용
+		//Book item = (Book) itemService.findById(itemId); // method 이름으로 query생성
+		Book item = (Book) itemService.findByIdQuery(itemId); // @Query 사용
 		BookForm form = new BookForm();
 		form.setId(item.getId());
 		form.setName(item.getName());
@@ -64,5 +66,12 @@ public class ItemController {
 		model.addAttribute("form", form);
 		return "items/updateItemForm";
 	}
-
+	
+	@PostMapping(value = "/items/{itemId}/edit")
+	public String updateItem(@ModelAttribute("form") BookForm form) {
+		//itemService.updateItem(form.getId() , form.getName() , form.getPrice());
+		
+		itemService.updateItem(form);
+		return "redirect:/items";
+	}
 }

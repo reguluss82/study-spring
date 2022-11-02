@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class="container">
-		<form th:object="${form}" method="post">
+		<form th:object="${form}" method="post"> <!-- action이 없는 상태에서 submit 하면 있던 url로 다시 요청 -->
 			<!-- id -->
 			<input type="hidden" th:field="*{id}">
 			<div class="form-group">
@@ -15,11 +15,11 @@
 			</div>
 			<div class="form-group">
 				<label th:for="price">가격</label>
-				<input type="text" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">
+				<input type="number" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">
 			</div>
 			<div class="form-group">
 				<label th:for="stockQuantity">수량</label>
-				<input type="text" th:field="*{stockQuantity}" class="form-control" placeholder="수량을 입력하세요">
+				<input type="number" th:field="*{stockQuantity}" class="form-control" placeholder="수량을 입력하세요">
 			</div>
 			<div class="form-group">
 				<label th:for="author">저자</label>

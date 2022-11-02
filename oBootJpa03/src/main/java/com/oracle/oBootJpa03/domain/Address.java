@@ -17,7 +17,7 @@ public class Address {
 	private String street;
 	private String zipcode;
 	
-	protected Address() { //함부로 생성하지 못하게
+	protected Address() { //기본생성자 함부로 생성하지 못하게
 	}
 	
 	public Address(String city, String street, String zipcode) {
