@@ -21,6 +21,7 @@ import com.oracle.oBootJpa03.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service
+//영속성 컨텍스트에 관리를 받지않아, 스냅샷 저장. 변경감지 수행등을 하지 않아 성능향상
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class OrderService {
