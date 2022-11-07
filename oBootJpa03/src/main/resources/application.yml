@@ -12,7 +12,7 @@ spring:
   # JPA Setting
   jpa:
     hibernate:
-      ddl-auto: update  # none create
+      ddl-auto: create # none create
     properties:
       hibernate:
       show_sql: true  # System에서 hibernate 실행 SQL

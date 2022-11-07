@@ -2,6 +2,9 @@ package com.oracle.oBootSecurity02.controller;
 
 import java.util.Iterator;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,6 +63,21 @@ public class SecurityController02 {
 	public String admin2() {
 		System.out.println("SecurityController02 admin2 start...");
 		return "admin";
+	}
+	
+	@Secured("ROLE_MANAGER")
+	@GetMapping("/count")
+	public String count() {
+		System.out.println("SecurityController02 count start...");
+		return "count";
+	}
+	
+	@PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+	//@PostAuthorize //실행 후 authorize 
+	@GetMapping("/count/2")
+	public String count2() {
+		System.out.println("SecurityController02 count2 start...");
+		return "count";
 	}
 	@GetMapping("/loginFail")
 	public String loginFail() {

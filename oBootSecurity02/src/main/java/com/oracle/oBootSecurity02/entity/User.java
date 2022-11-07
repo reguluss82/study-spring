@@ -31,4 +31,5 @@ public class User {
 	private String    role; // ROLE_USER, ROLE_ADMIN, ROLE_MANAGER
 	@CreationTimestamp
 	private Timestamp createdate;
+	//private Timestamp logindate; //로그인시간 저장하여 인증관리하기위함
 }
