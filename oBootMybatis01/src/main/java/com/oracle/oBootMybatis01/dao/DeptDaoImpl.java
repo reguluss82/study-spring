@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.oracle.oBootMybatis01.model.Dept;
+import com.oracle.oBootMybatis01.model.DeptVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +28,11 @@ public class DeptDaoImpl implements DeptDao {
 		}
 		return deptList;
 
+	}
+
+	@Override
+	public void insertDept(DeptVO deptVO) {
+		session.selectOne("ProcDeptInsert", deptVO);
 	}
 	
 }

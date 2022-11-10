@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import com.oracle.oBootMybatis01.dao.DeptDao;
 import com.oracle.oBootMybatis01.dao.EmpDao;
 import com.oracle.oBootMybatis01.model.Dept;
+import com.oracle.oBootMybatis01.model.DeptVO;
 import com.oracle.oBootMybatis01.model.Emp;
+import com.oracle.oBootMybatis01.model.EmpDept;
 
 import lombok.RequiredArgsConstructor;
 
@@ -47,6 +49,27 @@ public class EmpServiceImpl implements EmpService {
 	@Override
 	public List<Dept> deptSelect() {
 		return dd.deptSelect();
+	}
+
+	@Override
+	public int insertEmp(Emp emp) {
+		int result = ed.insertEmp(emp);
+		return result;
+	}
+
+	@Override
+	public int deleteEmp(int empno) {
+		return ed.deleteEmp(empno);
+	}
+
+	@Override
+	public List<EmpDept> listEmpDept() {
+		return ed.listEmpDept();
+	}
+
+	@Override
+	public void insertDept(DeptVO deptVO) {
+		dd.insertDept(deptVO);
 	}
 
 }

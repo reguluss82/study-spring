@@ -47,7 +47,7 @@
 			<td colspan="2">
 				<input type="button" value="목록" onclick="location.href='listEmp'">
 				<input type="button" value="수정" onclick="location.href='updateFormEmp?empno=${emp.empno}'">
-				<input type="button" value="삭제" onclick="location.href='delete?=empno=${emp.empno}'">
+				<input type="button" value="삭제" onclick="location.href='deleteEmp?empno=${emp.empno}'">
 			</td>
 		</tr>
 	</table>

@@ -41,4 +41,27 @@
 		FROM emp
 		WHERE empno IN (SELECT mgr FROM emp)
 	</select>
+	
+	<insert id="tkInsertEmp" parameterType="Emp">
+		INSERT INTO emp
+			(
+			empno, ename, job, sal, hiredate, comm, mgr, deptno
+			)
+		VALUES
+			(
+			#{empno},
+			#{ename},
+			#{job},
+			#{sal},
+			#{hiredate},
+			#{comm},
+			#{mgr},
+			#{deptno}
+			)
+	</insert>
+	
+	<delete id="tkDeleteEmp" parameterType="int">
+		DELETE emp
+		WHERE empno = #{empno}
+	</delete>
 </mapper>

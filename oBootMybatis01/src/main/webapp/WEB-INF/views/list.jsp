@@ -12,6 +12,7 @@
 	<a href="writeFormEmp">입력</a>
 	<h3>사원수 : ${totalEmp }</h3>
 	<p>kk3 수정시 전달 Message : ${kk3 }<p>
+	<p>insert 성공시 전달 Message : ${msg}<p>
 	<c:set var="num" value="${page.total-page.start+1}"></c:set>
 	
 	<table>

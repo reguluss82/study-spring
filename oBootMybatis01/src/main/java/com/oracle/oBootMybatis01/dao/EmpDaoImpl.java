@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.oracle.oBootMybatis01.model.Emp;
+import com.oracle.oBootMybatis01.model.EmpDept;
 
 import lombok.RequiredArgsConstructor;
 
@@ -71,6 +72,39 @@ public class EmpDaoImpl implements EmpDao {
 		}
 		
 		return empList;
+	}
+
+	@Override
+	public int insertEmp(Emp emp) {
+		int result = 0;
+		try {
+			result = session.insert("tkInsertEmp", emp);
+		} catch (Exception e) {
+			System.out.println("insertEmp err -> " + e.getMessage());
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteEmp(int empno) {
+		int result = 0;
+		try {
+			result = session.delete("tkDeleteEmp", empno);
+		} catch (Exception e) {
+			System.out.println("deleteEmp err -> " + e.getMessage());
+		}
+		return result;
+	}
+
+	@Override
+	public List<EmpDept> listEmpDept() {
+		List<EmpDept> listEmpDept = null;
+		try {
+			listEmpDept = session.selectList("tkListEmpDept");
+		} catch (Exception e) {
+			System.out.println("deleteEmp err -> " + e.getMessage());
+		}
+		return listEmpDept;
 	}
 
 }
