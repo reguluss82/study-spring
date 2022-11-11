@@ -1,5 +1,6 @@
 package com.oracle.oBootMybatis01.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -32,7 +33,12 @@ public class DeptDaoImpl implements DeptDao {
 
 	@Override
 	public void insertDept(DeptVO deptVO) {
-		session.selectOne("ProcDeptInsert", deptVO);
+		session.selectOne("procDeptInsert", deptVO);
+	}
+
+	@Override
+	public void selListDept(HashMap<String, Object> map) {
+		session.selectOne("procDeptList", map);
 	}
 	
 }

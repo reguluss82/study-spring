@@ -3,21 +3,80 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.oracle.oBootMybatis01.DeptMapper">
+	<resultMap type="Dept" id="DeptResult">
+		<result property="deptno" column="deptno"/>
+		<result property="dname"  column="dname"/>
+		<result property="loc"    column="loc"/>
+	</resultMap>
+	
 	<select id="tkSelectDept" resultType="Dept">
 		SELECT *
 		FROM dept
 	</select>
+	<select id="tkSelectDept3" resultMap="DeptResult">
+		SELECT *
+		FROM dept
+	</select>
 	
-	<select id="ProcDeptInsert" parameterType="DeptVO" statementType="CALLABLE">
+	<select id="procDeptInsert" parameterType="DeptVO" statementType="CALLABLE">
 		{
 			call Dept_Insert3(
-				${deptno ,  mode=IN ,  jdbcType=INTEGER},
-				${dname ,   mode=IN ,  jdbcType=VARCHAR},
-				${loc ,     mode=IN ,  jdbcType=VARCHAR},
-				${odeptno , mode=OUT , jdbcType=INTEGER},
-				${odname ,  mode=OUT , jdbcType=VARCHAR},
-				${oloc ,    mode=OUT , jdbcType=VARCHAR}
+				#{deptno ,  mode=IN ,  jdbcType=INTEGER},
+				#{dname ,   mode=IN ,  jdbcType=VARCHAR},
+				#{loc ,     mode=IN ,  jdbcType=VARCHAR},
+				#{odeptno , mode=OUT , jdbcType=INTEGER},
+				#{odname ,  mode=OUT , jdbcType=VARCHAR},
+				#{oloc ,    mode=OUT , jdbcType=VARCHAR}
 			)
 		}
 	</select>
+<!-- //Spring에서 DeptVO 사용 DeptVO 전달 받음
+CREATE OR REPLACE PROCEDURE dept_insert3
+    (vdeptno IN dept.deptno%TYPE, 
+    vdname IN dept.dname%TYPE, 
+    vloc IN dept.loc%TYPE, 
+    p_deptno OUT dept.deptno%TYPE, 
+    p_dname OUT dept.dname%TYPE, 
+    p_loc OUT dept.loc%TYPE)
+IS
+BEGIN
+    INSERT INTO dept VALUES(vdeptno, vdname, vloc);
+    COMMIT;
+    
+    DBMS_OUTPUT.ENABLE;
+     //%TYPE 데이터형 변수 사용
+    SELECT deptno, dname, loc
+    INTO p_deptno, p_dname, p_loc
+    FROM dept
+    WHERE deptno = vdeptno;
+    
+     //결과값 출력
+    DBMS_OUTPUT.PUT_LINE('부서번호 : ' || p_deptno);
+    DBMS_OUTPUT.PUT_LINE('부서이름 : ' || p_dname);
+    DBMS_OUTPUT.PUT_LINE('부서위치 : ' || p_loc);
+END; -->
+
+	<select id="procDeptList" parameterType="java.util.Map" statementType="CALLABLE">
+		{
+			call Dept_Cursor3(
+				#{sDeptno , mode=IN , jdbcType=INTEGER},
+				#{eDeptno , mode=IN , jdbcType=INTEGER},
+				#{dept    , mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=DeptResult}
+			)
+		}
+	</select>
+<!-- //Spring에서 Cursor문 사용 ListDept 전달 받음
+CREATE OR REPLACE PROCEDURE dept_cursor3
+    (
+    sdeptno IN dept.deptno%TYPE , 
+    edeptno IN dept.deptno%TYPE , 
+    dept_cursor OUT SYS_REFCURSOR
+    )
+IS
+BEGIN
+    OPEN dept_cursor FOR
+        SELECT deptno , dname , loc
+        FROM dept
+        WHERE deptno BETWEEN sdeptno AND edeptno;
+END dept_cursor3; -->
 </mapper>

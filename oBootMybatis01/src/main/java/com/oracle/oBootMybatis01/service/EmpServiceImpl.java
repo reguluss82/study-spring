@@ -1,23 +1,27 @@
 package com.oracle.oBootMybatis01.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.oracle.oBootMybatis01.dao.DeptDao;
 import com.oracle.oBootMybatis01.dao.EmpDao;
+import com.oracle.oBootMybatis01.dao.Member1Dao;
 import com.oracle.oBootMybatis01.model.Dept;
 import com.oracle.oBootMybatis01.model.DeptVO;
 import com.oracle.oBootMybatis01.model.Emp;
 import com.oracle.oBootMybatis01.model.EmpDept;
+import com.oracle.oBootMybatis01.model.Member1;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class EmpServiceImpl implements EmpService {
-	private final EmpDao  ed;
-	private final DeptDao dd;
+	private final EmpDao     ed;
+	private final DeptDao    dd;
+	private final Member1Dao md;
 	
 	@Override
 	public int totalEmp() {
@@ -70,6 +74,21 @@ public class EmpServiceImpl implements EmpService {
 	@Override
 	public void insertDept(DeptVO deptVO) {
 		dd.insertDept(deptVO);
+	}
+
+	@Override
+	public void selListDept(HashMap<String, Object> map) {
+		dd.selListDept(map);
+	}
+
+	@Override
+	public int memCount(String id) {
+		return md.memCount(id);
+	}
+
+	@Override
+	public List<Member1> listMem(Member1 member1) {
+		return md.listMem(member1);
 	}
 
 }

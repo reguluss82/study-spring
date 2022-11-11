@@ -1,5 +1,6 @@
 package com.oracle.oBootMybatis01.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.activation.DataSource;
@@ -7,19 +8,24 @@ import javax.activation.FileDataSource;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.oracle.oBootMybatis01.model.Dept;
 import com.oracle.oBootMybatis01.model.DeptVO;
 import com.oracle.oBootMybatis01.model.Emp;
 import com.oracle.oBootMybatis01.model.EmpDept;
+import com.oracle.oBootMybatis01.model.Member1;
 import com.oracle.oBootMybatis01.service.EmpService;
 import com.oracle.oBootMybatis01.service.Paging;
 
@@ -96,13 +102,32 @@ public class EmpController {
 		List<Dept> deptList = es.deptSelect();
 		model.addAttribute("empMngList", empList);
 		model.addAttribute("deptList", deptList);
-		return "writeFormEmp";
+//		return "writeFormEmp";
+		return "writeFormEmp3"; //validation
 	}
 	
 	@PostMapping(value = "writeEmp")
 	public String writeEmp(Emp emp , Model model) {
-		int result = es.insertEmp(emp);
-		if (result > 0) {
+		int insertResult = es.insertEmp(emp);
+		if (insertResult > 0) {
+			model.addAttribute("msg", "성공");
+			return "forward:listEmp";
+		}
+		model.addAttribute("msg", "실패");
+		return "forward:writeFormEmp";
+	}
+	
+	//Validation check
+	@PostMapping(value = "writeEmp3")
+	public String writeEmp3(@ModelAttribute("emp") @Valid Emp emp , BindingResult result , Model model) {
+		// Validation err -> return "forward:writeFormEmp"
+		if (result.hasErrors()) {
+			System.out.println("EmpController writeEmp3 hasErrors...");
+			model.addAttribute("msg", "BindingResult  입력 실패");
+			return "forward:writeFormEmp";
+		}
+		int insertResult = es.insertEmp(emp);
+		if (insertResult > 0) {
 			model.addAttribute("msg", "성공");
 			return "forward:listEmp";
 		}
@@ -166,7 +191,6 @@ public class EmpController {
 	// procedure Test 입력화면
 	@RequestMapping(value = "writeDeptIn")
 	public String writeDeptIn(Model model) {
-		System.out.println("writeDeptIn Start..");
 		return "writeDept3";
 	}
 	
@@ -181,5 +205,60 @@ public class EmpController {
 			model.addAttribute("dept", deptVO);
 		}
 		return "writeDept3";
+	}
+	
+//	                    DTO                           MAP
+//	1. 정의             Class로 선 정의               즉흥적 구성
+//	2. Parameter 전달   DTO -> Setter Or 생성자       map.put
+//	3. 사용용도         명확한 정의                   시간부족/대화부족 
+//	4. 장점             유지보수 용이                 기능개발 시간 절감
+
+	@GetMapping(value = "/writeDeptCursor")
+	public String writeDeptCursor(Model model) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("sDeptno", 30);
+		map.put("eDeptno", 60);
+		es.selListDept(map);
+		List<Dept> deptList = (List<Dept>) map.get("dept");
+		for (Dept dept : deptList) {
+			System.out.println("dept.getDname() -> " + dept.getDname());
+			System.out.println("dept.getLoc() -> "+ dept.getLoc());
+		}
+		model.addAttribute("deptList", deptList);
+		return "writeDeptCursor";
+	}
+	
+	// interCeptor 시작화면
+	@RequestMapping(value = "interCeptorForm")
+	public String interCeptorForm(Model model) {
+		return "interCeptorForm";
+	}
+	
+	@RequestMapping(value = "interCeptor")
+	public String interCeptor(String id, Model model) {
+		int memCnt = es.memCount(id);
+		model.addAttribute("id", id);
+		model.addAttribute("memCnt", memCnt);
+		return "interCeptor";
+	}
+	// SampleInterceptor 내용을 받아 처리
+	@RequestMapping(value = "doMemberWrite", method = RequestMethod.GET)
+	public String doMemberWrite( Model model , HttpServletRequest request) {
+		String ID = (String) request.getSession().getAttribute("ID");
+		model.addAttribute("id", ID);
+		return "doMemberWrite";
+	}
+	
+	// interCeptor 진행 Test
+	@RequestMapping(value = "doMemberList")
+	public String doMemberList(Model model , HttpServletRequest request) {
+		String ID = (String) request.getSession().getAttribute("ID");
+		Member1 member1 = null;
+		//Member1 List Get Service
+		List<Member1> listMem = es.listMem(member1);
+		model.addAttribute("ID", ID);
+		model.addAttribute("listMem", listMem);
+		return "doMemberList"; // User 존재하면 User 이용 조회 Page
+		
 	}
 }

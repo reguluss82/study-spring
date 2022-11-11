@@ -1,10 +1,13 @@
 package com.oracle.oBootMybatis01.model;
 
+import javax.validation.constraints.NotEmpty;
+
 import lombok.Data;
 
 @Data
 public class Emp {
 	private int empno;
+	@NotEmpty(message = "이름은 필수 입니다")
 	private String ename;
 	private String job;
 	private String hiredate;
