@@ -91,4 +91,9 @@ public class EmpServiceImpl implements EmpService {
 		return md.listMem(member1);
 	}
 
+	@Override
+	public String deptName(int deptno) {
+		return ed.deptName(deptno);
+	}
+
 }

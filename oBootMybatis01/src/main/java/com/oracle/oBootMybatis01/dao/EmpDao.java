@@ -6,19 +6,21 @@ import com.oracle.oBootMybatis01.model.Emp;
 import com.oracle.oBootMybatis01.model.EmpDept;
 
 public interface EmpDao {
-	int       totalEmp();
+	int           totalEmp();
 
-	List<Emp> listEmp(Emp emp);
+	List<Emp>     listEmp(Emp emp);
 
-	Emp       detailEmp(int empno);
+	Emp           detailEmp(int empno);
 
-	void      updateEmp(Emp emp);
+	void          updateEmp(Emp emp);
 
-	List<Emp> listManager();
+	List<Emp>     listManager();
 
-	int insertEmp(Emp emp);
+	int           insertEmp(Emp emp);
 
-	int deleteEmp(int empno);
+	int           deleteEmp(int empno);
 
 	List<EmpDept> listEmpDept();
+
+	String        deptName(int deptno);
 }

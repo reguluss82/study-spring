@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oracle.oBootMybatis01.model.Dept;
 import com.oracle.oBootMybatis01.model.DeptVO;
@@ -261,4 +262,29 @@ public class EmpController {
 		return "doMemberList"; // User 존재하면 User 이용 조회 Page
 		
 	}
+	
+	// ajaxForm Test 입력화면
+	@RequestMapping(value = "ajaxForm")
+	public String ajaxForm(Model model) {
+		return "ajaxForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "getDeptName")
+	public String getDeptName(int deptno, Model model) {
+		String deptName = es.deptName(deptno);
+		return deptName;
+	}
+	
+	@RequestMapping(value = "listEmpAjaxForm")
+	public String listEmpAjaxForm(Model model) {
+		Emp emp = new Emp();
+		emp.setStart(1);
+		emp.setEnd(10);
+		List<Emp> listEmp = es.listEmp(emp);
+		model.addAttribute("result", "kkk");
+		model.addAttribute("listEmp", listEmp);
+		return "listEmpAjaxForm";
+	}
+	
 }
