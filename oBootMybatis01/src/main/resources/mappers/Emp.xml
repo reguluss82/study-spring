@@ -7,7 +7,7 @@
 		SELECT Count(*) FROM emp
 	</select>
 	
-	<select id="tkEmpListAll" parameterType="Emp" resultType="Emp">
+	<select id="tkEmpListAll2" parameterType="Emp" resultType="Emp">
 		SELECT *
 		FROM
    			(
@@ -16,6 +16,41 @@
 		        (select * from emp order by empno) a
 		    )
 		WHERE rn BETWEEN #{start} and #{end}
+	</select>
+	<select id="tkEmpListAll" parameterType="Emp" resultType="Emp">
+		<![CDATA[
+			SELECT *
+			FROM
+	   			(
+			    SELECT rownum rn , a.*
+			    FROM
+			        (select * from emp order by empno) a
+			    )
+			WHERE rn >= #{start} 
+			AND rn <= #{end}
+		]]>
+	</select>
+		
+	<select id="tkEmpSearchList3" parameterType="Emp" resultType="Emp">
+		SELECT *
+		FROM
+   			(
+		    SELECT rownum rn , a.*
+		    FROM
+		        (select * from emp order by empno) a
+		    )
+		WHERE rn BETWEEN #{start} and #{end}
+		<choose>
+			<when test="search == 's_job'">
+				AND job like '%' || #{keyword} || '%'
+			</when>
+			<when test="search == 's_ename'">
+				AND ename like '%' || #{keyword} || '%'
+			</when>
+			<otherwise>
+				AND job like '%'
+			</otherwise>
+		</choose>
 	</select>
 	
 	<select id="tkEmpSelOne" parameterType="int" resultType="Emp">

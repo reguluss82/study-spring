@@ -40,6 +40,7 @@ public class UploadController {
 		log.info("contentType: " + file1.getContentType());
 		log.info("uploadPath: " + uploadPath);
 		String savedName = uploadFile(file1.getOriginalFilename(), file1.getBytes(), uploadPath);
+		// service --> DB CRUD
 		log.info("savedName: " + savedName);
 		model.addAttribute("savedName", savedName);
 		

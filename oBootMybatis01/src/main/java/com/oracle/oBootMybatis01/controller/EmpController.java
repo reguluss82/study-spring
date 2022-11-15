@@ -60,6 +60,25 @@ public class EmpController {
 		return "list";
 	}
 	
+	@RequestMapping(value = "listSearch3")
+	public String listSearch3(Emp emp , String currentPage , Model model) {
+		int totalEmp = es.totalEmp();
+		
+		// Paging 작업
+		Paging page = new Paging(totalEmp, currentPage);
+		// Parameter emp --> Page만 추가
+		emp.setStart(page.getStart());
+		emp.setEnd(page.getEnd());
+		
+		List<Emp> listSearchEmp = es.listSearchEmp(emp);
+		
+		model.addAttribute("totalEmp", totalEmp);
+		model.addAttribute("listEmp", listSearchEmp);
+		model.addAttribute("page", page);
+		
+		return "list";
+	}
+	
 	@GetMapping(value = "detailEmp")
 	public String detailEmp(int empno , Model model) {
 		Emp emp = es.detailEmp(empno);
@@ -287,4 +306,15 @@ public class EmpController {
 		return "listEmpAjaxForm";
 	}
 	
+	@RequestMapping(value = "listEmpAjaxForm2")
+	public String listEmpAjaxForm2(Model model) {
+		System.out.println("listEmpAjaxForm2 Start");
+		Emp emp = new Emp();
+		System.out.println("Ajax List Test Start");
+		emp.setStart(1);
+		emp.setEnd(15);
+		List<Emp> listEmp = es.listEmp(emp);
+		model.addAttribute("listEmp", listEmp);
+		return "listEmpAjaxForm2";
+	}
 }

@@ -118,4 +118,16 @@ public class EmpDaoImpl implements EmpDao {
 		return resultStr;
 	}
 
+	@Override
+	public List<Emp> empSearchList3(Emp emp) {
+		List<Emp> empSearchList3 = null;
+		try {
+			empSearchList3 = session.selectList("tkEmpSearchList3", emp);
+		} catch (Exception e) {
+			System.out.println("empSearchList3 err" + e.getMessage());
+		}
+		System.out.println("empSearchList3 size" + empSearchList3.size());
+		return empSearchList3;
+	}
+
 }

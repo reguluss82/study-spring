@@ -96,4 +96,9 @@ public class EmpServiceImpl implements EmpService {
 		return ed.deptName(deptno);
 	}
 
+	@Override
+	public List<Emp> listSearchEmp(Emp emp) {
+		return ed.empSearchList3(emp);
+	}
+
 }

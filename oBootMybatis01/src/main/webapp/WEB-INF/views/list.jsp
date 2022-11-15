@@ -13,6 +13,16 @@
 	<h3>사원수 : ${totalEmp }</h3>
 	<p>kk3 수정시 전달 Message : ${kk3 }<p>
 	<p>insert 성공시 전달 Message : ${msg}<p>
+	
+	<form action="listSearch3">
+		<select name="search">
+			<option value="s_job">업무조회</option>
+			<option value="s_ename">이름조회</option>
+		</select>
+		<input type="text" name="keyword" placeholder="keyword을 입력하세요">
+		<button type="submit">keyword 검색</button><p>
+	</form>
+	
 	<c:set var="num" value="${page.total-page.start+1}"></c:set>
 	
 	<table>

@@ -21,7 +21,8 @@ public class SecurityConfig {
 //	※ url의 값은 .loginProcessingUrl(“/login")의 값 변경에 따라 변경됩니다.
 //	3.요청 정보가 일치하면 Username과 Password정보가 담긴 Authentication 객체를 생성하여 AuthenticationManager에 넘깁니다.
 //	4.AuthenticationManager는 이전 과정에서 받은 Authenticaton객체를 AuthenticationProvider에 넘겨주어 인증을 체크하도록 합니다.
-//	5.AuthenticationProvider는 실질적으로 인증을 체크하는 역할을 합니다. 인증을 성공한다면 최종적인 Authenticatoin객체를 생성하여 Authentication객체를 넘기며 인증을 실패한다면 5-1의 AuthenticationException을 호출하여 UsernamePasswordAuthenticationFilter가 시작된 초기 부분으로 이동하게 합니다.
+//	5.AuthenticationProvider는 실질적으로 인증을 체크하는 역할을 합니다. 인증을 성공한다면 최종적인 Authenticatoin객체를 생성하여 
+//	Authentication객체를 넘기며 인증을 실패한다면 5-1의 AuthenticationException을 호출하여 UsernamePasswordAuthenticationFilter가 시작된 초기 부분으로 이동하게 합니다.
 //	6.AuthenticationManager는 AuthenticationProvider로부터 받은 최종 Authentication객체를 다음 과정으로 넘겨줍니다.
 //	7.최종 Authenticatoin 객체는 Security Context에 저장됩니다.
 //	8.Security Context에 저장된 후에는 SuccessHandler를 호출하여 실행하게 됩니다.

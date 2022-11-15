@@ -27,6 +27,23 @@
 					}
 		});
 	}
+	// RestController
+	// Deptno -> deptName 조건은 객체로 가져옴
+	function getDept(vDeptno) {
+		alert("vDeptno->"+ vDeptno);
+		$.ajax(
+				{
+					url: "sample/sendVO2",
+					data: {deptno : vDeptno},
+					dataType: 'json',
+					success: function(data) {
+						resultStr = data.firstName + " " + data.lastName + " " + data.mno;
+						alert("ajax getDept resultStr -> " + resultStr);
+						$('#RestDept').val(resultStr);  // Input Tag
+					}
+				}
+		);
+	}
 </script>
 
 </head>
@@ -47,5 +64,8 @@
 	deptName:  <input type="text" id="deptName"  readonly="readonly"><p>
     Message :  <span id="msg"></span><p>
 
+	RestController sendVO2: <input type="text" id="RestDept" readonly="readonly"><p>
+	RestController sendVO2: sendVO2<input type="button" id="btn_Dept" value="부서명" onclick="getDept(10)"><p>
+	
 </body>
 </html>
