@@ -48,10 +48,14 @@
 				{
 					url: "/empnoDelete"
 					data: {empno : selEmpno, ename : selEname}
-					dataType: 'json'
-					success: function(
-								
-							)
+					dataType: 'text'
+					success: function(data) {
+						alert(".ajax getDeptDelete data ->" + data);
+						if (data == '1') {
+							//성공하면 아래라인 수행
+							$('#emp' + vIndex).remove(); /* Delete Tag */
+						}
+					}
 				}
 		)
 	}
